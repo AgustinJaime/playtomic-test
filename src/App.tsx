@@ -1,22 +1,41 @@
 import React from 'react'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
+import ProtectedRoute from './components/ProtectedRoute'
 
-import { Navbar } from './components/Navbar'
-import { About } from './pages/About'
-import { Home } from './pages/Home'
+import Form from './containers/FormCt'
+import Dashboard from './containers/DashboardCt'
+import Settings from './containers/SettingsCt'
 
-const App: React.FC = () => {
+const App: React.FC = (props: any) => {
+  const { isAuthenticated, isVerifying } = props
   return (
-    <BrowserRouter>
-      <Navbar />
-      <div className="container">
-        <Switch>
-          <Route path="/" component={Home} exact />
-          <Route path="/about" component={About} />
-        </Switch>
-      </div>
-    </BrowserRouter>
+    <Switch>
+      <Redirect exact from="/" to="/dashboard" />
+      <ProtectedRoute
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+        path="/dashboard"
+        component={Dashboard}
+        exact
+      />
+      <ProtectedRoute
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+        path="/settings"
+        component={Settings}
+        exact
+      />
+      <Route path="/login" component={Form} exact />
+    </Switch>
   )
 }
 
-export default App
+function mapStateToProps(state: any) {
+  return {
+    isAuthenticated: state.auth.isAuthenticated,
+    isVerifying: state.auth.isVerifying,
+  }
+}
+
+export default connect(mapStateToProps)(App)

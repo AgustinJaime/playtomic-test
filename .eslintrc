@@ -3,8 +3,8 @@
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint"],
   "extends": [
+    "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
-    "airbnb-typescript",
     "prettier",
     "prettier/@typescript-eslint",
     "prettier/react"
@@ -18,7 +18,10 @@
     // Disable <Fragment> => <> replacement. Feel free to change
     "react/jsx-fragments": "off",
     // Disable prefer default export
-    "import/prefer-default-export": "off"
+    "import/prefer-default-export": "off",
+    "@typescript-eslint/no-unused-vars": "off",
+    "@typescript-eslint/no-unused-parameters": "off",
+    "@typescript-eslint/no-unused-locals": "off"
   },
   "overrides": [
     {
