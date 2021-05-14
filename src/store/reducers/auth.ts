@@ -8,6 +8,7 @@ import {
   LOGOUT_FAILURE,
   VERIFY_REQUEST,
   VERIFY_SUCCESS,
+  RESET_USER,
 } from '../actions/'
 
 export interface AuthActions {
@@ -91,6 +92,11 @@ export default (
       return {
         ...state,
         isVerifying: false,
+      }
+    case RESET_USER:
+      return {
+        ...state,
+        ...initialState,
       }
     default:
       return state

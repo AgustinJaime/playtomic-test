@@ -14,7 +14,7 @@ interface DashboardProps {
 const Dashboard: React.FC<DashboardProps> = (props: DashboardProps) => {
   const { countries, pending, getData } = props
   useEffect(() => {
-    getData()
+    ;(!countries || !countries.length) && getData()
   }, [])
 
   return pending ? (

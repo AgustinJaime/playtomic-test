@@ -5,6 +5,7 @@ import axios from 'axios'
 export const GET_DATA_PENDING = 'GET_DATA_PENDING'
 export const GET_DATA_SUCCESS = 'GET_DATA_SUCCESS'
 export const GET_DATA_FAILURE = 'GET_DATA_FAILURE'
+export const RESET_DATA = 'RESET_DATA'
 
 export type DispatchDashboardAction = (arg: DashboardAction) => DashboardAction
 
@@ -38,6 +39,12 @@ const getDataSuccess = (countries: CountryData[]) => {
 const getDataFailure = () => {
   return {
     type: GET_DATA_FAILURE,
+  }
+}
+
+export const resetData = () => {
+  return {
+    type: RESET_DATA,
   }
 }
 

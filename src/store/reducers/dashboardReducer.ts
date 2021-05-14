@@ -3,6 +3,7 @@ import {
   GET_DATA_PENDING,
   GET_DATA_SUCCESS,
   GET_DATA_FAILURE,
+  RESET_DATA,
 } from '../actions/'
 
 export interface DashboardState {
@@ -43,6 +44,12 @@ export default (
         ...state,
         error: true,
       }
+    case RESET_DATA:
+      return {
+        ...state,
+        ...initialState,
+      }
+
     default:
       return state
   }

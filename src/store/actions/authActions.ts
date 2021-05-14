@@ -1,3 +1,4 @@
+import { resetData } from './dashboardActions'
 import { UserCredential, User } from '@firebase/auth-types'
 import { myFirebase } from '../firebase/firebase'
 import { AuthActions } from '../reducers/auth'
@@ -10,6 +11,7 @@ export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
 export const LOGOUT_FAILURE = 'LOGOUT_FAILURE'
 export const VERIFY_REQUEST = 'VERIFY_REQUEST'
 export const VERIFY_SUCCESS = 'VERIFY_SUCCESS'
+export const RESET_USER = 'RESET_USER'
 
 export type UserType = UserCredential | User
 
@@ -64,6 +66,12 @@ const verifySuccess = () => {
   }
 }
 
+export const resetUser = () => {
+  return {
+    type: RESET_USER,
+  }
+}
+
 export const loginUser = (email: string, password: string) => (
   dispatch: DispatchAuthAction
 ) => () => {
@@ -86,6 +94,8 @@ export const logoutUser = () => (dispatch: DispatchAuthAction) => {
     .auth()
     .signOut()
     .then(() => {
+      dispatch(resetUser())
+      dispatch(resetData())
       dispatch(receiveLogout())
     })
     .catch((error) => {

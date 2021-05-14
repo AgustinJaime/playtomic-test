@@ -6,6 +6,10 @@ import TextField from '@material-ui/core/TextField'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 
 import './Form.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { State } from '../../store/reducers/reducers'
+import { loginUser } from '../../store/actions'
+import { LinearProgress } from '@material-ui/core'
 
 interface FormProps {
   isAuthenticated: boolean
@@ -31,8 +35,11 @@ const validationSchema = yup.object({
   password: yup.string().required('Password is required'),
 })
 
-const Form: React.FC<FormProps> = (props: FormProps) => {
-  const { isAuthenticated, loginUser } = props
+const Form: React.FC<FormProps> = () => {
+  const dispatch = useDispatch()
+  const { isAuthenticated, isLoggingIn } = useSelector(
+    (state: State) => state.auth
+  )
   const classes = useStyles()
 
   const formik = useFormik({
@@ -42,7 +49,8 @@ const Form: React.FC<FormProps> = (props: FormProps) => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      loginUser(values.email, values.password)
+      // to fix
+      dispatch(loginUser(values.email, values.password)(dispatch))
     },
   })
 
@@ -50,36 +58,40 @@ const Form: React.FC<FormProps> = (props: FormProps) => {
     <Redirect to="/dashboard" />
   ) : (
     <div className="login_container">
-      <div className="login_form_container">
-        <h1>Welcome!</h1>
-        <h3>Please Login</h3>
-        <form className={classes.root} onSubmit={formik.handleSubmit}>
-          <TextField
-            fullWidth
-            id="email"
-            name="email"
-            label="Email"
-            value={formik.values.email}
-            onChange={formik.handleChange}
-            error={formik.touched.email && Boolean(formik.errors.email)}
-            helperText={formik.touched.email && formik.errors.email}
-          />
-          <TextField
-            fullWidth
-            id="password"
-            name="password"
-            label="Password"
-            type="password"
-            value={formik.values.password}
-            onChange={formik.handleChange}
-            error={formik.touched.password && Boolean(formik.errors.password)}
-            helperText={formik.touched.password && formik.errors.password}
-          />
-          <Button color="primary" variant="contained" fullWidth type="submit">
-            Submit
-          </Button>
-        </form>
-      </div>
+      {isLoggingIn ? (
+        <LinearProgress />
+      ) : (
+        <div className="login_form_container">
+          <h1>Welcome!</h1>
+          <h3>Please Login</h3>
+          <form className={classes.root} onSubmit={formik.handleSubmit}>
+            <TextField
+              fullWidth
+              id="email"
+              name="email"
+              label="Email"
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              error={formik.touched.email && Boolean(formik.errors.email)}
+              helperText={formik.touched.email && formik.errors.email}
+            />
+            <TextField
+              fullWidth
+              id="password"
+              name="password"
+              label="Password"
+              type="password"
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              error={formik.touched.password && Boolean(formik.errors.password)}
+              helperText={formik.touched.password && formik.errors.password}
+            />
+            <Button color="primary" variant="contained" fullWidth type="submit">
+              Submit
+            </Button>
+          </form>
+        </div>
+      )}
     </div>
   )
 }

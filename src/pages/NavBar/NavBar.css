@@ -1,11 +1,25 @@
-.navigation_bar {
+.container {
   width: 100%;
   max-width: 1280px;
-  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.navigation_container {
+  margin: 20px;
+  width: 100%;
+  max-width: 960px;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  background: white;
+  justify-content: space-between;
 }
 
 .main {
-  margin: 20px auto;
+  /* margin: 20px auto; */
   width: 100%;
   max-width: 920px;
   min-height: 600px;
