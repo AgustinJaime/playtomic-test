@@ -4,6 +4,7 @@ import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
+import { CountryData } from '../../store/actions'
 
 const useStyles = makeStyles({
   root: {
@@ -22,11 +23,10 @@ const useStyles = makeStyles({
   },
 })
 
-const CountryCard = (props: any) => {
+const CountryCard = (props: { country: CountryData }) => {
   const { country } = props
   const classes = useStyles()
   const bull = <span className={classes.bullet}>•</span>
-  console.log(country)
   return (
     <Card className={classes.root} variant="outlined">
       <CardContent>

@@ -19,6 +19,7 @@
     "react/jsx-fragments": "off",
     // Disable prefer default export
     "import/prefer-default-export": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-unused-vars": "off",
     "@typescript-eslint/no-unused-parameters": "off",
     "@typescript-eslint/no-unused-locals": "off"

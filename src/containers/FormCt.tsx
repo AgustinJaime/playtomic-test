@@ -1,7 +1,15 @@
 import { connect } from 'react-redux'
 import Form from '../pages/Form/Form'
+import { loginUser } from '../store/actions'
+import { State } from '../store/reducers/reducers'
 
-const mapStateToProps = (state: any) => {
+interface StateProps {
+  isLoggingIn: boolean
+  loginError: boolean
+  isAuthenticated: boolean
+}
+
+const mapStateToProps = (state: State): StateProps => {
   return {
     isLoggingIn: state.auth.isLoggingIn,
     loginError: state.auth.loginError,
@@ -9,10 +17,8 @@ const mapStateToProps = (state: any) => {
   }
 }
 
-const mapDispatchToProps = (dispatch: any) => {
-  return {
-    dispatch,
-  }
+const mapDispatchToProps = {
+  loginUser,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form)

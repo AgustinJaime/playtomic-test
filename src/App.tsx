@@ -1,14 +1,16 @@
 import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 import ProtectedRoute from './components/ProtectedRoute'
-
 import Form from './containers/FormCt'
 import Dashboard from './containers/DashboardCt'
 import Settings from './containers/SettingsCt'
+import { State } from './store/reducers/reducers'
 
-const App: React.FC = (props: any) => {
-  const { isAuthenticated, isVerifying } = props
+const App: React.FC = () => {
+  const { isVerifying, isAuthenticated } = useSelector(
+    (state: State) => state.auth
+  )
   return (
     <Switch>
       <Redirect exact from="/" to="/dashboard" />
@@ -31,11 +33,4 @@ const App: React.FC = (props: any) => {
   )
 }
 
-function mapStateToProps(state: any) {
-  return {
-    isAuthenticated: state.auth.isAuthenticated,
-    isVerifying: state.auth.isVerifying,
-  }
-}
-
-export default connect(mapStateToProps)(App)
+export default App

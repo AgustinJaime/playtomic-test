@@ -1,4 +1,6 @@
+import { UserCredential, User } from '@firebase/auth-types'
 import { myFirebase } from '../firebase/firebase'
+import { AuthActions } from '../reducers/auth'
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
@@ -9,13 +11,17 @@ export const LOGOUT_FAILURE = 'LOGOUT_FAILURE'
 export const VERIFY_REQUEST = 'VERIFY_REQUEST'
 export const VERIFY_SUCCESS = 'VERIFY_SUCCESS'
 
+export type UserType = UserCredential | User
+
+export type DispatchAuthAction = (arg: AuthActions) => AuthActions
+
 const requestLogin = () => {
   return {
     type: LOGIN_REQUEST,
   }
 }
 
-const receiveLogin = (user: any) => {
+const receiveLogin = (user: UserType) => {
   return {
     type: LOGIN_SUCCESS,
     user,
@@ -59,8 +65,8 @@ const verifySuccess = () => {
 }
 
 export const loginUser = (email: string, password: string) => (
-  dispatch: any
-) => {
+  dispatch: DispatchAuthAction
+) => () => {
   dispatch(requestLogin())
   myFirebase
     .auth()
@@ -69,13 +75,12 @@ export const loginUser = (email: string, password: string) => (
       dispatch(receiveLogin(user))
     })
     .catch((error) => {
-      //Do something with the error if you want!
       console.log(error)
       dispatch(loginError())
     })
 }
 
-export const logoutUser = () => (dispatch: any) => {
+export const logoutUser = () => (dispatch: DispatchAuthAction) => {
   dispatch(requestLogout())
   myFirebase
     .auth()
@@ -84,13 +89,12 @@ export const logoutUser = () => (dispatch: any) => {
       dispatch(receiveLogout())
     })
     .catch((error) => {
-      //Do something with the error if you want!
       console.log(error)
       dispatch(logoutError())
     })
 }
 
-export const verifyAuth = () => (dispatch: any) => {
+export const verifyAuth = () => (dispatch: DispatchAuthAction) => {
   dispatch(verifyRequest())
   myFirebase.auth().onAuthStateChanged((user) => {
     if (user !== null) {

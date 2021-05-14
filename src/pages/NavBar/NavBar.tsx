@@ -7,22 +7,17 @@ import Tab from '@material-ui/core/Tab'
 import './NavBar.css'
 import { Link, useLocation } from 'react-router-dom'
 
-// const useStyles = makeStyles((theme: Theme) =>
-//   createStyles({
-//     root: {
-//       width: '90%',
-//       padding: '20px',
-//       backgroundColor: theme.palette.secondary.dark,
-//       borderRadius: '5px',
-//     },
-//   })
-// )
+interface NavBarProps {
+  title: string
+  subtitle: string
+  children: React.ReactNode
+}
 
-const NavBar = (props: any) => {
+const NavBar = (props: NavBarProps) => {
   const location = useLocation()
   const [value, setValue] = React.useState(location.pathname)
 
-  const handleChange = (_: React.ChangeEvent<any>, newValue: string) => {
+  const handleChange = (_: React.ChangeEvent<unknown>, newValue: string) => {
     setValue(newValue)
   }
 

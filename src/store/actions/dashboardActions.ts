@@ -1,8 +1,26 @@
+import { DashboardAction } from './../reducers/dashboardReducer'
+import { formatData } from './../../utils/actionsUtils'
 import axios from 'axios'
 
 export const GET_DATA_PENDING = 'GET_DATA_PENDING'
 export const GET_DATA_SUCCESS = 'GET_DATA_SUCCESS'
 export const GET_DATA_FAILURE = 'GET_DATA_FAILURE'
+
+export type DispatchDashboardAction = (arg: DashboardAction) => DashboardAction
+
+export interface CountryData {
+  Country: string
+  CountryCode: string
+  Date: string
+  ID: string
+  NewConfirmed: number
+  NewDeaths: number
+  NewRecovered: number
+  Slug: string
+  TotalConfirmed: number
+  TotalDeaths: number
+  TotalRecovered: number
+}
 
 const getDataPending = () => {
   return {
@@ -10,7 +28,7 @@ const getDataPending = () => {
   }
 }
 
-const getDataSuccess = (countries: any) => {
+const getDataSuccess = (countries: CountryData[]) => {
   return {
     type: GET_DATA_SUCCESS,
     countries,
@@ -23,17 +41,15 @@ const getDataFailure = () => {
   }
 }
 
-export const getData = () => (dispatch: any) => {
+export const getData = () => (dispatch: DispatchDashboardAction) => {
   dispatch(getDataPending())
   axios
     .get('https://api.covid19api.com/summary')
     .then(({ data }) => {
-      const newData = data.Countries.filter(
-        (country: any) => country.NewDeaths > 200
-      ).sort((a: any, b: any) => (a.NewDeaths < b.NewDeaths ? 1 : -1))
+      const newData = formatData(data.Countries)
       dispatch(getDataSuccess(newData))
     })
-    .catch((error: any) => {
+    .catch((error) => {
       getDataFailure()
       console.log(error)
     })

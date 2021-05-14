@@ -1,3 +1,4 @@
+import { UserType } from './../actions/authActions'
 import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
@@ -9,6 +10,22 @@ import {
   VERIFY_SUCCESS,
 } from '../actions/'
 
+export interface AuthActions {
+  type: string
+  user?: UserType
+}
+
+export interface AuthState {
+  isLoggingIn: boolean
+  isLoggingOut: boolean
+  isVerifying: boolean
+  loginError: boolean
+  logoutError: boolean
+  isAuthenticated: boolean
+  verifyingError: boolean
+  user?: UserType | Record<string, unknown>
+}
+
 const initialState = {
   isLoggingIn: false,
   isLoggingOut: false,
@@ -16,10 +33,14 @@ const initialState = {
   loginError: false,
   logoutError: false,
   isAuthenticated: false,
+  verifyingError: false,
   user: {},
 }
 
-export default (state: any = initialState, action: any) => {
+export default (
+  state: AuthState = initialState,
+  action: AuthActions
+): AuthState => {
   switch (action.type) {
     case LOGIN_REQUEST:
       return {

@@ -1,8 +1,10 @@
 import { connect } from 'react-redux'
 import Dashboard from '../pages/Dashboard/Dashboard'
 import NavBar from '../pages/NavBar/NavBar'
+import { State } from '../store/reducers/reducers'
+import { getData } from '../store/actions/dashboardActions'
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: State) => {
   return {
     countries: state.dashboard.countries,
     error: state.dashboard.error,
@@ -10,10 +12,8 @@ const mapStateToProps = (state: any) => {
   }
 }
 
-const mapDispatchToProps = (dispatch: any) => {
-  return {
-    dispatch,
-  }
+const mapDispatchToProps = {
+  getData,
 }
 
 const ConnectedDashboard = connect(

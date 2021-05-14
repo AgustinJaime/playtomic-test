@@ -11,6 +11,8 @@ const composeEnhancers =
       })
     : compose
 
+export type State = ReturnType<typeof rootReducer>
+
 export default function configureStore() {
   const store = createStore(
     rootReducer,
