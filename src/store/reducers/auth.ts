@@ -1,15 +1,5 @@
 import { UserType } from './../actions/authActions'
-import {
-  LOGIN_REQUEST,
-  LOGIN_SUCCESS,
-  LOGIN_FAILURE,
-  LOGOUT_REQUEST,
-  LOGOUT_SUCCESS,
-  LOGOUT_FAILURE,
-  VERIFY_REQUEST,
-  VERIFY_SUCCESS,
-  RESET_USER,
-} from '../actions/'
+import actionTypeKeys from '../actionTypeKeys'
 
 export interface AuthActions {
   type: string
@@ -43,57 +33,57 @@ export default (
   action: AuthActions
 ): AuthState => {
   switch (action.type) {
-    case LOGIN_REQUEST:
+    case actionTypeKeys.LOGIN_REQUEST:
       return {
         ...state,
         isLoggingIn: true,
         loginError: false,
       }
-    case LOGIN_SUCCESS:
+    case actionTypeKeys.LOGIN_SUCCESS:
       return {
         ...state,
         isLoggingIn: false,
         isAuthenticated: true,
         user: action.user,
       }
-    case LOGIN_FAILURE:
+    case actionTypeKeys.LOGIN_FAILURE:
       return {
         ...state,
         isLoggingIn: false,
         isAuthenticated: false,
         loginError: true,
       }
-    case LOGOUT_REQUEST:
+    case actionTypeKeys.LOGOUT_REQUEST:
       return {
         ...state,
         isLoggingOut: true,
         logoutError: false,
       }
-    case LOGOUT_SUCCESS:
+    case actionTypeKeys.LOGOUT_SUCCESS:
       return {
         ...state,
         isLoggingOut: false,
         isAuthenticated: false,
         user: {},
       }
-    case LOGOUT_FAILURE:
+    case actionTypeKeys.LOGOUT_FAILURE:
       return {
         ...state,
         isLoggingOut: false,
         logoutError: true,
       }
-    case VERIFY_REQUEST:
+    case actionTypeKeys.VERIFY_REQUEST:
       return {
         ...state,
         isVerifying: true,
         verifyingError: false,
       }
-    case VERIFY_SUCCESS:
+    case actionTypeKeys.VERIFY_SUCCESS:
       return {
         ...state,
         isVerifying: false,
       }
-    case RESET_USER:
+    case actionTypeKeys.RESET_USER:
       return {
         ...state,
         ...initialState,

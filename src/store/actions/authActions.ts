@@ -2,16 +2,7 @@ import { resetData } from './dashboardActions'
 import { UserCredential, User } from '@firebase/auth-types'
 import { myFirebase } from '../firebase/firebase'
 import { AuthActions } from '../reducers/auth'
-
-export const LOGIN_REQUEST = 'LOGIN_REQUEST'
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
-export const LOGIN_FAILURE = 'LOGIN_FAILURE'
-export const LOGOUT_REQUEST = 'LOGOUT_REQUEST'
-export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
-export const LOGOUT_FAILURE = 'LOGOUT_FAILURE'
-export const VERIFY_REQUEST = 'VERIFY_REQUEST'
-export const VERIFY_SUCCESS = 'VERIFY_SUCCESS'
-export const RESET_USER = 'RESET_USER'
+import actionTypeKeys from '../actionTypeKeys'
 
 export type UserType = UserCredential | User
 
@@ -19,56 +10,56 @@ export type DispatchAuthAction = (arg: AuthActions) => AuthActions
 
 const requestLogin = () => {
   return {
-    type: LOGIN_REQUEST,
+    type: actionTypeKeys.LOGIN_REQUEST,
   }
 }
 
 const receiveLogin = (user: UserType) => {
   return {
-    type: LOGIN_SUCCESS,
+    type: actionTypeKeys.LOGIN_SUCCESS,
     user,
   }
 }
 
 const loginError = () => {
   return {
-    type: LOGIN_FAILURE,
+    type: actionTypeKeys.LOGIN_FAILURE,
   }
 }
 
 const requestLogout = () => {
   return {
-    type: LOGOUT_REQUEST,
+    type: actionTypeKeys.LOGOUT_REQUEST,
   }
 }
 
 const receiveLogout = () => {
   return {
-    type: LOGOUT_SUCCESS,
+    type: actionTypeKeys.LOGOUT_SUCCESS,
   }
 }
 
 const logoutError = () => {
   return {
-    type: LOGOUT_FAILURE,
+    type: actionTypeKeys.LOGOUT_FAILURE,
   }
 }
 
 const verifyRequest = () => {
   return {
-    type: VERIFY_REQUEST,
+    type: actionTypeKeys.VERIFY_REQUEST,
   }
 }
 
 const verifySuccess = () => {
   return {
-    type: VERIFY_SUCCESS,
+    type: actionTypeKeys.VERIFY_SUCCESS,
   }
 }
 
 export const resetUser = () => {
   return {
-    type: RESET_USER,
+    type: actionTypeKeys.RESET_USER,
   }
 }
 
