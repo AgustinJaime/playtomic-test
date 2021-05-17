@@ -11,7 +11,7 @@ interface DashboardProps {
   getData(): void
 }
 
-const Dashboard: React.FC<DashboardProps> = (props: DashboardProps) => {
+const CasesBoard: React.FC<DashboardProps> = (props: DashboardProps) => {
   const { countries, pending, getData } = props
   useEffect(() => {
     !(countries?.cases.length || countries?.deaths.length) && getData()
@@ -23,9 +23,10 @@ const Dashboard: React.FC<DashboardProps> = (props: DashboardProps) => {
     <div className="casesBoard_container">
       {countries &&
         countries.cases.map((country: CountryData) => {
-          const { Country, NewConfirmed, TotalConfirmed } = country
+          const { Country, NewConfirmed, TotalConfirmed, ID } = country
           return (
             <CountryCard
+              key={ID}
               name={Country}
               newConfirmed={NewConfirmed}
               totalConfirmed={TotalConfirmed}
@@ -36,4 +37,4 @@ const Dashboard: React.FC<DashboardProps> = (props: DashboardProps) => {
   )
 }
 
-export default Dashboard
+export default CasesBoard

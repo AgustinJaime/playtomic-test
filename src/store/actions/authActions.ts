@@ -65,7 +65,7 @@ export const resetUser = () => {
 
 export const loginUser = (email: string, password: string) => (
   dispatch: DispatchAuthAction
-) => () => {
+) => {
   dispatch(requestLogin())
   myFirebase
     .auth()

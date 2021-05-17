@@ -53,8 +53,7 @@ const Form: React.FC<FormProps> = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      // to fix
-      dispatch(loginUser(values.email, values.password)(dispatch))
+      dispatch(loginUser(values.email, values.password))
     },
   })
 

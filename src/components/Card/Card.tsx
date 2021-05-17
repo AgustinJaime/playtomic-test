@@ -1,10 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
-// import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
-// import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
-// import { CountryData } from '../../store/actions'
 
 interface CardProps {
   name: string
@@ -31,7 +28,6 @@ const useStyles = makeStyles({
 
 const CountryCard = (props: CardProps) => {
   const classes = useStyles()
-  // const bull = <span className={classes.bullet}>•</span>
   return (
     <Card className={classes.root} variant="outlined">
       <CardContent>

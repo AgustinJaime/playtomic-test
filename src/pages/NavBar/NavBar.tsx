@@ -3,7 +3,6 @@ import Paper from '@material-ui/core/Paper'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import { logoutUser } from '../../store/actions'
-// import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 
 import './NavBar.css'
 import { Link, useLocation } from 'react-router-dom'

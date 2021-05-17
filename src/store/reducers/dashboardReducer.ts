@@ -29,7 +29,6 @@ export default (
         pending: true,
       }
     case actionTypeKeys.GET_DATA_SUCCESS:
-      console.log(action)
       return {
         ...state,
         pending: false,
