@@ -1,6 +1,6 @@
 import { resetData } from './dashboardActions'
 import { UserCredential, User } from '@firebase/auth-types'
-import { myFirebase } from '../firebase/firebase'
+import { googleProvider, myFirebase } from '../../services/firebase/firebase'
 import { AuthActions } from '../reducers/auth'
 import actionTypeKeys from '../actionTypeKeys'
 
@@ -72,6 +72,19 @@ export const loginUser = (email: string, password: string) => (
     .signInWithEmailAndPassword(email, password)
     .then((user) => {
       dispatch(receiveLogin(user))
+    })
+    .catch((error) => {
+      console.log(error)
+      dispatch(loginError())
+    })
+}
+export const loginGoogleUser = () => (dispatch: DispatchAuthAction) => {
+  dispatch(requestLogin())
+  myFirebase
+    .auth()
+    .signInWithPopup(googleProvider)
+    .then((result) => {
+      result.user && dispatch(receiveLogin(result.user))
     })
     .catch((error) => {
       console.log(error)
