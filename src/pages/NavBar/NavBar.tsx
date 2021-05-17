@@ -42,14 +42,14 @@ const NavBar = (props: NavBarProps) => {
             <Tab
               label="Dashboard"
               component={Link}
-              to={'/dashboard'}
-              value={'/dashboard'}
+              to={'/newcases'}
+              value={'/newcases'}
             />
             <Tab
               label="Settings"
               component={Link}
-              to={'/settings'}
-              value={'/settings'}
+              to={'/newdeaths'}
+              value={'/newdeaths'}
             />
           </Tabs>
         </Paper>

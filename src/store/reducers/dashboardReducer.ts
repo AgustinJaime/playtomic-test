@@ -1,26 +1,21 @@
-import { CountryData } from './../actions/dashboardActions'
-import {
-  GET_DATA_PENDING,
-  GET_DATA_SUCCESS,
-  GET_DATA_FAILURE,
-  RESET_DATA,
-} from '../actions/'
+import { NewData } from './../actions/dashboardActions'
+import actionTypeKeys from '../actionTypeKeys'
 
 export interface DashboardState {
   pending: boolean
   error: boolean
-  countries?: CountryData[] | []
+  countries?: NewData
 }
 
 export interface DashboardAction {
   type: string
-  countries?: CountryData[]
+  countries?: NewData
 }
 
 const initialState = {
   pending: false,
   error: false,
-  countries: [],
+  countries: { cases: [], deaths: [] },
 }
 
 export default (
@@ -28,23 +23,24 @@ export default (
   action: DashboardAction
 ): DashboardState => {
   switch (action.type) {
-    case GET_DATA_PENDING:
+    case actionTypeKeys.GET_DATA_PENDING:
       return {
         ...state,
         pending: true,
       }
-    case GET_DATA_SUCCESS:
+    case actionTypeKeys.GET_DATA_SUCCESS:
+      console.log(action)
       return {
         ...state,
         pending: false,
         countries: action.countries,
       }
-    case GET_DATA_FAILURE:
+    case actionTypeKeys.GET_DATA_FAILURE:
       return {
         ...state,
         error: true,
       }
-    case RESET_DATA:
+    case actionTypeKeys.RESET_DATA:
       return {
         ...state,
         ...initialState,

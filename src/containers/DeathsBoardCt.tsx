@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import CasesBoard from '../pages/CasesBoard/CasesBoard'
+import DeathsBoard from '../pages/DeathsBoard/DeathsBoard'
 import NavBar from '../pages/NavBar/NavBar'
 import { State } from '../store/reducers/reducers'
 import { getData } from '../store/actions/dashboardActions'
@@ -16,20 +16,20 @@ const mapDispatchToProps = {
   getData,
 }
 
-const ConnectedCasesBoard = connect(
+const ConnectedDeathsBoard = connect(
   mapStateToProps,
   mapDispatchToProps
-)(CasesBoard)
+)(DeathsBoard)
 
-const nestedCasesBoard = () => {
+const nestedDeathsBoard = () => {
   return (
     <NavBar
       title={'COVID-19'}
-      subtitle={'Countries with the highest number of CASES in the last day'}
+      subtitle={'Countries with the highest number of DEATHS in the last day'}
     >
-      <ConnectedCasesBoard />
+      <ConnectedDeathsBoard />
     </NavBar>
   )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(nestedCasesBoard)
+export default connect(mapStateToProps, mapDispatchToProps)(nestedDeathsBoard)

@@ -1,11 +1,7 @@
 import { DashboardAction } from './../reducers/dashboardReducer'
 import { formatData } from './../../utils/actionsUtils'
 import axios from 'axios'
-
-export const GET_DATA_PENDING = 'GET_DATA_PENDING'
-export const GET_DATA_SUCCESS = 'GET_DATA_SUCCESS'
-export const GET_DATA_FAILURE = 'GET_DATA_FAILURE'
-export const RESET_DATA = 'RESET_DATA'
+import actionTypeKeys from '../actionTypeKeys'
 
 export type DispatchDashboardAction = (arg: DashboardAction) => DashboardAction
 
@@ -23,28 +19,33 @@ export interface CountryData {
   TotalRecovered: number
 }
 
+export interface NewData {
+  cases: CountryData[]
+  deaths: CountryData[]
+}
+
 const getDataPending = () => {
   return {
-    type: GET_DATA_PENDING,
+    type: actionTypeKeys.GET_DATA_PENDING,
   }
 }
 
-const getDataSuccess = (countries: CountryData[]) => {
+const getDataSuccess = (countries: NewData) => {
   return {
-    type: GET_DATA_SUCCESS,
+    type: actionTypeKeys.GET_DATA_SUCCESS,
     countries,
   }
 }
 
 const getDataFailure = () => {
   return {
-    type: GET_DATA_FAILURE,
+    type: actionTypeKeys.GET_DATA_FAILURE,
   }
 }
 
 export const resetData = () => {
   return {
-    type: RESET_DATA,
+    type: actionTypeKeys.RESET_DATA,
   }
 }
 
@@ -53,7 +54,7 @@ export const getData = () => (dispatch: DispatchDashboardAction) => {
   axios
     .get('https://api.covid19api.com/summary')
     .then(({ data }) => {
-      const newData = formatData(data.Countries)
+      const newData: NewData = formatData(data.Countries)
       dispatch(getDataSuccess(newData))
     })
     .catch((error) => {

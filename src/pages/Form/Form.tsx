@@ -8,7 +8,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import './Form.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { State } from '../../store/reducers/reducers'
-import { loginUser } from '../../store/actions'
+import { loginUser, loginGoogleUser } from '../../store/actions'
 import { LinearProgress } from '@material-ui/core'
 
 interface FormProps {
@@ -42,6 +42,10 @@ const Form: React.FC<FormProps> = () => {
   )
   const classes = useStyles()
 
+  const googleLogin = () => {
+    dispatch(loginGoogleUser())
+  }
+
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -55,7 +59,7 @@ const Form: React.FC<FormProps> = () => {
   })
 
   return isAuthenticated ? (
-    <Redirect to="/dashboard" />
+    <Redirect to="/newcases" />
   ) : (
     <div className="login_container">
       {isLoggingIn ? (
@@ -90,6 +94,10 @@ const Form: React.FC<FormProps> = () => {
               Submit
             </Button>
           </form>
+          <br />
+          <Button onClick={googleLogin} variant={'contained'} color="secondary">
+            Continue with Google
+          </Button>
         </div>
       )}
     </div>

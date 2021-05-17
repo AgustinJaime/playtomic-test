@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import ProtectedRoute from './components/ProtectedRoute'
 import Form from './pages/Form/Form'
 import Dashboard from './containers/DashboardCt'
-import Settings from './containers/SettingsCt'
+import DeathsBoard from './containers/DeathsBoardCt'
 import { State } from './store/reducers/reducers'
 
 const App: React.FC = () => {
@@ -13,22 +13,23 @@ const App: React.FC = () => {
   )
   return (
     <Switch>
-      <Redirect exact from="/" to="/dashboard" />
+      <Redirect exact from="/" to="/newcases" />
       <ProtectedRoute
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
-        path="/dashboard"
+        path="/newcases"
         component={Dashboard}
         exact
       />
       <ProtectedRoute
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
-        path="/settings"
-        component={Settings}
+        path="/newdeaths"
+        component={DeathsBoard}
         exact
       />
       <Route path="/login" component={Form} exact />
+      <Redirect to="/newCases" />
     </Switch>
   )
 }
