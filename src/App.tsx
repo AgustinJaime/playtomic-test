@@ -3,7 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import ProtectedRoute from './components/ProtectedRoute'
 import Form from './pages/Form/Form'
-import Dashboard from './containers/DashboardCt'
+import CasesBoard from './containers/CasesBoardCt'
 import DeathsBoard from './containers/DeathsBoardCt'
 import { State } from './store/reducers/reducers'
 
@@ -18,7 +18,7 @@ const App: React.FC = () => {
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
         path="/newcases"
-        component={Dashboard}
+        component={CasesBoard}
         exact
       />
       <ProtectedRoute
