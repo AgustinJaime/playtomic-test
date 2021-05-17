@@ -39,13 +39,13 @@ const NavBar = (props: NavBarProps) => {
             onChange={handleChange}
           >
             <Tab
-              label="Dashboard"
+              label="New Cases"
               component={Link}
               to={'/newcases'}
               value={'/newcases'}
             />
             <Tab
-              label="Settings"
+              label="New Deaths"
               component={Link}
               to={'/newdeaths'}
               value={'/newdeaths'}
